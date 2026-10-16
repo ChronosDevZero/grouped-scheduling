@@ -17,7 +17,7 @@ dotnet add package GroupedScheduling.Build
 Or in your `.csproj`:
 
 ```xml
-<PackageReference Include="GroupedScheduling.Build" Version="0.1.0" />
+<PackageReference Include="GroupedScheduling.Build" Version="0.1.1" />
 ```
 
 ## Quick start

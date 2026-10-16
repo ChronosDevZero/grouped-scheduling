@@ -10,7 +10,7 @@
 
     <!-- PackageId must differ from the runtime project name to avoid NuGet graph ambiguity. -->
     <PackageId>GroupedScheduling.Build</PackageId>
-    <Version>0.1.0</Version>
+    <Version>0.1.1</Version>
     <Authors>ChronosDevZero</Authors>
     <Copyright>Copyright (c) 2026 ChronosDevZero</Copyright>
     <Description>Attribute-driven group-aware async scheduling with build-time IL weaving.</Description>

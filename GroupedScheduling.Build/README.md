@@ -1,40 +1,59 @@
 # GroupedScheduling
 
-Attribute-driven group-aware async scheduling with build-time IL weaving.
+Attribute-driven, **group-aware async scheduling** for .NET with **build-time IL weaving**.
 
-Full docs: [`docs/`](../docs/README.md) (getting started, modes, diagnostics, architecture).
+Mark methods with `[ScheduleGroup]`. Callers keep normal `await` / delegates / reflection — the weaver injects scheduling, nesting checks, and linked cancellation. No Fody.
 
-## Consumer setup
+- **NuGet:** [GroupedScheduling.Build](https://www.nuget.org/packages/GroupedScheduling.Build)
+- **Source & docs:** [github.com/ChronosDevZero/grouped-scheduling](https://github.com/ChronosDevZero/grouped-scheduling)
+- **License:** MIT
 
-Add one package reference to the project that declares `[ScheduleGroup]` methods:
-
-```xml
-<ItemGroup>
-  <PackageReference Include="GroupedScheduling.Build" Version="0.1.0" />
-</ItemGroup>
-```
-
-That single reference brings the runtime library (`GroupedScheduling`), Roslyn analyzers (TSCH001–005), and the post-compile IL weaver.
-
-Pack:
+## Install
 
 ```bash
-dotnet pack GroupedScheduling.Build/GroupedScheduling.Build.csproj -c Release -o artifacts/packages
+dotnet add package GroupedScheduling.Build
 ```
 
-`dotnet build` weaves the assembly after compile. No Fody required.
-
-Disable weaving for a project with:
+Or in the `.csproj` of any project that **declares** `[ScheduleGroup]` methods:
 
 ```xml
-<PropertyGroup>
-  <GroupedSchedulingWeaveEnabled>false</GroupedSchedulingWeaveEnabled>
-</PropertyGroup>
+<PackageReference Include="GroupedScheduling.Build" Version="0.1.1" />
 ```
 
-## Host apps (graceful stop)
+One reference brings:
 
-In the process that hosts attributed types, register once:
+| Piece | Role |
+|---|---|
+| `GroupedScheduling` | Runtime API |
+| Roslyn analyzers (TSCH001–005) | Catch misuse at design time |
+| MSBuild IL weaver | Rewrites attributed methods after compile |
+
+Apps that only *call* already-woven types need the runtime (transitive) and host registration — they do **not** need to re-weave.
+
+## Quick start
+
+**1. Attribute methods**
+
+```csharp
+using GroupedScheduling;
+
+public sealed class OrdersService
+{
+    [ScheduleGroup("orders", ScheduleMode.ExclusiveSerial)]
+    public async Task SaveAsync(Order order, CancellationToken ct)
+    {
+        await _db.SaveAsync(order, ct);
+    }
+}
+```
+
+**2. Call as usual**
+
+```csharp
+await orders.SaveAsync(order, ct);
+```
+
+**3. Register once in the host process** (graceful stop)
 
 ```csharp
 using GroupedScheduling.Hosting;
@@ -42,4 +61,26 @@ using GroupedScheduling.Hosting;
 builder.Services.AddGroupedScheduling();
 ```
 
-On host stop this cancels object/type tokens and rejects new scheduled work. Method authors only need `[ScheduleGroup]`. Callers do not need a per-call `using`. DI still disposes woven `IDisposable` instances when the container disposes them. GC does not call `Dispose`.
+On host stop this cancels object/type tokens and rejects new scheduled work. Method authors only need `[ScheduleGroup]`. Callers do not need a per-call `using`. DI still disposes woven `IDisposable` instances when the container disposes them — GC does not call `Dispose`.
+
+## Optional: disable weaving
+
+```xml
+<PropertyGroup>
+  <GroupedSchedulingWeaveEnabled>false</GroupedSchedulingWeaveEnabled>
+</PropertyGroup>
+```
+
+Without weaving, `[ScheduleGroup]` has no effect (analyzer **TSCH002** warns if attributes are used without imported targets).
+
+## Learn more
+
+| Topic | Link |
+|---|---|
+| Getting started | [docs/getting-started.md](https://github.com/ChronosDevZero/grouped-scheduling/blob/main/docs/getting-started.md) |
+| Modes / nesting / shutdown | [docs/](https://github.com/ChronosDevZero/grouped-scheduling/tree/main/docs) |
+| Diagnostics (TSCH / GSWEAVE) | [docs/diagnostics.md](https://github.com/ChronosDevZero/grouped-scheduling/blob/main/docs/diagnostics.md) |
+| Architecture & weaving | [docs/architecture.md](https://github.com/ChronosDevZero/grouped-scheduling/blob/main/docs/architecture.md) |
+| Sample app | [samples/GroupedScheduling.Sample](https://github.com/ChronosDevZero/grouped-scheduling/tree/main/samples/GroupedScheduling.Sample) |
+
+**Requires:** .NET 11 (`net11.0`) target for consumers of this package version.

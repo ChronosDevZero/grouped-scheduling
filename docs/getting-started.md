@@ -6,7 +6,7 @@ Any project that **declares** `[ScheduleGroup]` methods must reference the weave
 
 ```xml
 <ItemGroup>
-  <PackageReference Include="GroupedScheduling.Build" Version="0.1.0" />
+  <PackageReference Include="GroupedScheduling.Build" Version="0.1.1" />
 </ItemGroup>
 ```
 
