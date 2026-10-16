@@ -1,0 +1,9 @@
+<Solution>
+  <Project Path="GroupedScheduling/GroupedScheduling.csproj" />
+  <Project Path="GroupedScheduling.Weaver/GroupedScheduling.Weaver.csproj" />
+  <Project Path="GroupedScheduling.Build/GroupedScheduling.Build.csproj" />
+  <Project Path="GroupedScheduling.Analyzers/GroupedScheduling.Analyzers.csproj" />
+  <Project Path="GroupedScheduling.Fixture/GroupedScheduling.Fixture.csproj" />
+  <Project Path="GroupedScheduling.Tests/GroupedScheduling.Tests.csproj" />
+  <Project Path="samples/GroupedScheduling.Sample/GroupedScheduling.Sample.csproj" />
+</Solution>

@@ -1,0 +1,34 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net11.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <RootNamespace>GroupedScheduling.Fixture</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\GroupedScheduling\GroupedScheduling.csproj" />
+  </ItemGroup>
+
+  <!-- In-repo weave host (same as Sample / NuGet consumers). -->
+  <PropertyGroup>
+    <_GroupedSchedulingBuildProject>$(MSBuildThisFileDirectory)..\GroupedScheduling.Build\GroupedScheduling.Build.csproj</_GroupedSchedulingBuildProject>
+    <_GroupedSchedulingTaskOutDir>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\GroupedScheduling.Build\bin\$(Configuration)\net11.0\'))</_GroupedSchedulingTaskOutDir>
+    <GroupedSchedulingTaskAssembly>$(_GroupedSchedulingTaskOutDir)GroupedScheduling.Build.dll</GroupedSchedulingTaskAssembly>
+    <_GroupedSchedulingWeaverDll>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\GroupedScheduling.Weaver\bin\$(Configuration)\net11.0\GroupedScheduling.Weaver.dll'))</_GroupedSchedulingWeaverDll>
+    <_GroupedSchedulingTaskWeaverDll>$(_GroupedSchedulingTaskOutDir)GroupedScheduling.Weaver.dll</_GroupedSchedulingTaskWeaverDll>
+  </PropertyGroup>
+
+  <Import Project="..\GroupedScheduling.Build\build\GroupedScheduling.Build.props" />
+  <Import Project="..\GroupedScheduling.Build\build\GroupedScheduling.Build.targets" />
+
+  <Target Name="EnsureGroupedSchedulingTaskBuilt" BeforeTargets="CoreCompile"
+          Inputs="$(_GroupedSchedulingBuildProject);$(_GroupedSchedulingWeaverDll)"
+          Outputs="$(GroupedSchedulingTaskAssembly);$(_GroupedSchedulingTaskWeaverDll)">
+    <MSBuild Projects="$(_GroupedSchedulingBuildProject)"
+             Targets="Build"
+             Properties="Configuration=$(Configuration)" />
+  </Target>
+
+</Project>

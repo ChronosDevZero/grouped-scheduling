@@ -1,0 +1,39 @@
+<Project>
+  <PropertyGroup Condition="'$(GroupedSchedulingTaskAssembly)' == ''">
+    <_GroupedSchedulingTasksDir>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\tasks\net11.0\'))</_GroupedSchedulingTasksDir>
+    <GroupedSchedulingTaskAssembly>$(_GroupedSchedulingTasksDir)GroupedScheduling.Build.dll</GroupedSchedulingTaskAssembly>
+  </PropertyGroup>
+
+  <UsingTask TaskName="GroupedScheduling.Build.WeaveAssembly"
+             AssemblyFile="$(GroupedSchedulingTaskAssembly)"
+             Condition="'$(GroupedSchedulingWeaveEnabled)' == 'true'" />
+
+  <!--
+    Weave the intermediate assembly after CoreCompile, before copy to output.
+    Stamp file enables incremental skips when the assembly and task DLL are unchanged.
+  -->
+  <Target Name="GroupedSchedulingWeave"
+          AfterTargets="CoreCompile"
+          BeforeTargets="CopyFilesToOutputDirectory;CopyFilesToPublishDirectory"
+          Condition="'$(GroupedSchedulingWeaveEnabled)' == 'true'
+                     and '$(DesignTimeBuild)' != 'true'
+                     and '$(TargetName)' != ''
+                     and Exists('$(GroupedSchedulingTaskAssembly)')"
+          Inputs="$(IntermediateOutputPath)$(TargetName)$(TargetExt);$(GroupedSchedulingTaskAssembly);$([System.IO.Path]::Combine($([System.IO.Path]::GetDirectoryName($(GroupedSchedulingTaskAssembly))), 'GroupedScheduling.Weaver.dll'))"
+          Outputs="$(IntermediateOutputPath)$(TargetName)$(TargetExt).groupedscheduling.stamp">
+
+    <PropertyGroup>
+      <_GroupedSchedulingAssemblyToWeave>$([System.IO.Path]::GetFullPath('$(IntermediateOutputPath)$(TargetName)$(TargetExt)'))</_GroupedSchedulingAssemblyToWeave>
+    </PropertyGroup>
+
+    <Error Text="GroupedScheduling: intermediate assembly not found at '$(_GroupedSchedulingAssemblyToWeave)'."
+           Condition="!Exists('$(_GroupedSchedulingAssemblyToWeave)')" />
+
+    <GroupedScheduling.Build.WeaveAssembly
+        AssemblyPath="$(_GroupedSchedulingAssemblyToWeave)"
+        ReferencePaths="@(ReferencePath);@(ReferencePathWithRefAssemblies)" />
+
+    <Touch Files="$(IntermediateOutputPath)$(TargetName)$(TargetExt).groupedscheduling.stamp"
+           AlwaysCreate="true" />
+  </Target>
+</Project>

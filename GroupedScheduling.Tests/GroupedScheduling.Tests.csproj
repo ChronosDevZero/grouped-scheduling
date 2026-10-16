@@ -1,0 +1,31 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net11.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <IsPackable>false</IsPackable>
+    <RootNamespace>GroupedScheduling.Tests</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.14.1" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="9.0.10" />
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Analyzer.Testing" Version="1.1.2" />
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Workspaces" Version="4.14.0" />
+    <PackageReference Include="xunit" Version="2.9.3" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="3.1.4">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\GroupedScheduling\GroupedScheduling.csproj" />
+    <ProjectReference Include="..\GroupedScheduling.Weaver\GroupedScheduling.Weaver.csproj" />
+    <ProjectReference Include="..\GroupedScheduling.Analyzers\GroupedScheduling.Analyzers.csproj" />
+    <ProjectReference Include="..\GroupedScheduling.Fixture\GroupedScheduling.Fixture.csproj" />
+    <ProjectReference Include="..\samples\GroupedScheduling.Sample\GroupedScheduling.Sample.csproj" />
+  </ItemGroup>
+
+</Project>

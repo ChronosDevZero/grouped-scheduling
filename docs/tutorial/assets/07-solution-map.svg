@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <rect width="1280" height="720" fill="#F7F9FC"/>
+  <text x="640" y="48" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="28" font-weight="600" fill="#0F172A">Solution map</text>
+  <text x="640" y="78" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="15" fill="#475569">What each project is for</text>
+
+  <rect x="80" y="120" width="520" height="240" rx="12" fill="#FFFFFF" stroke="#0F766E" stroke-width="2.5"/>
+  <text x="340" y="155" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="16" font-weight="600" fill="#0F766E">PRODUCT</text>
+
+  <rect x="110" y="180" width="220" height="64" rx="8" fill="#ECFDF5" stroke="#0F766E" stroke-width="2"/>
+  <text x="220" y="208" text-anchor="middle" font-family="Consolas, monospace" font-size="13" fill="#0F172A">GroupedScheduling</text>
+  <text x="220" y="228" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="11" fill="#475569">runtime</text>
+
+  <rect x="350" y="180" width="220" height="64" rx="8" fill="#FFFFFF" stroke="#1E293B" stroke-width="2"/>
+  <text x="460" y="208" text-anchor="middle" font-family="Consolas, monospace" font-size="12" fill="#0F172A">.Weaver</text>
+  <text x="460" y="228" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="11" fill="#475569">Mono.Cecil transforms</text>
+
+  <rect x="110" y="265" width="220" height="64" rx="8" fill="#FFFFFF" stroke="#1E293B" stroke-width="2"/>
+  <text x="220" y="293" text-anchor="middle" font-family="Consolas, monospace" font-size="12" fill="#0F172A">.Analyzers</text>
+  <text x="220" y="313" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="11" fill="#475569">TSCH001-005</text>
+
+  <rect x="350" y="265" width="220" height="64" rx="8" fill="#FFF7ED" stroke="#B45309" stroke-width="2"/>
+  <text x="460" y="293" text-anchor="middle" font-family="Consolas, monospace" font-size="12" fill="#0F172A">.Build</text>
+  <text x="460" y="313" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="11" fill="#9A3412">NuGet + MSBuild task</text>
+
+  <rect x="680" y="120" width="520" height="240" rx="12" fill="#FFFFFF" stroke="#1E293B" stroke-width="2"/>
+  <text x="940" y="155" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="16" font-weight="600" fill="#334155">LEARN / VERIFY</text>
+
+  <rect x="710" y="180" width="220" height="64" rx="8" fill="#F1F5F9" stroke="#94A3B8" stroke-width="1.5"/>
+  <text x="820" y="208" text-anchor="middle" font-family="Consolas, monospace" font-size="12" fill="#0F172A">.Sample</text>
+  <text x="820" y="228" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="11" fill="#475569">console smokes</text>
+
+  <rect x="950" y="180" width="220" height="64" rx="8" fill="#F1F5F9" stroke="#94A3B8" stroke-width="1.5"/>
+  <text x="1060" y="208" text-anchor="middle" font-family="Consolas, monospace" font-size="12" fill="#0F172A">.Fixture</text>
+  <text x="1060" y="228" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="11" fill="#475569">woven test subjects</text>
+
+  <rect x="710" y="265" width="460" height="64" rx="8" fill="#F1F5F9" stroke="#94A3B8" stroke-width="1.5"/>
+  <text x="940" y="293" text-anchor="middle" font-family="Consolas, monospace" font-size="13" fill="#0F172A">GroupedScheduling.Tests</text>
+  <text x="940" y="313" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="11" fill="#475569">Engine, Weave, Analyzers, Workers, Hosting</text>
+
+  <rect x="80" y="400" width="1120" height="260" rx="12" fill="#F1F5F9" stroke="#94A3B8" stroke-width="1.5"/>
+  <text x="640" y="440" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="16" font-weight="600" fill="#0F172A">Package story</text>
+
+  <rect x="140" y="480" width="280" height="120" rx="10" fill="#FFFFFF" stroke="#1E293B" stroke-width="2"/>
+  <text x="280" y="525" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="14" font-weight="600" fill="#0F172A">lib/</text>
+  <text x="280" y="555" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="13" fill="#475569">runtime DLL</text>
+
+  <rect x="500" y="480" width="280" height="120" rx="10" fill="#FFFFFF" stroke="#1E293B" stroke-width="2"/>
+  <text x="640" y="525" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="14" font-weight="600" fill="#0F172A">tasks/ + build/</text>
+  <text x="640" y="555" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="13" fill="#475569">weaver host + targets</text>
+
+  <rect x="860" y="480" width="280" height="120" rx="10" fill="#FFFFFF" stroke="#1E293B" stroke-width="2"/>
+  <text x="1000" y="525" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="14" font-weight="600" fill="#0F172A">analyzers/</text>
+  <text x="1000" y="555" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="13" fill="#475569">Roslyn TSCH*</text>
+
+  <text x="640" y="640" text-anchor="middle" font-family="Consolas, monospace" font-size="14" fill="#0F766E">One PackageReference: GroupedScheduling.Build</text>
+</svg>

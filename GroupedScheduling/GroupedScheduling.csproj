@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net11.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <RootNamespace>GroupedScheduling</RootNamespace>
+    <AssemblyName>GroupedScheduling</AssemblyName>
+    <!-- Packaged via GroupedScheduling.Build (PackageId=GroupedScheduling.Build). -->
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+</Project>
+

@@ -1,0 +1,11 @@
+<Project>
+  <PropertyGroup>
+    <GroupedSchedulingWeaveEnabled Condition="'$(GroupedSchedulingWeaveEnabled)' == ''">true</GroupedSchedulingWeaveEnabled>
+    <!-- Surfaced to Roslyn analyzers (TSCH002). -->
+    <GroupedSchedulingWeaverImported>true</GroupedSchedulingWeaverImported>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <CompilerVisibleProperty Include="GroupedSchedulingWeaverImported" />
+  </ItemGroup>
+</Project>

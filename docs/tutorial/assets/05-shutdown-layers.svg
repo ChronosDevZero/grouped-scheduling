@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="780" viewBox="0 0 1280 780">
+  <rect width="1280" height="780" fill="#F7F9FC"/>
+  <text x="640" y="48" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="28" font-weight="600" fill="#0F172A">Shutdown and cancellation layers</text>
+  <text x="640" y="78" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="15" fill="#475569">Host stop, owner CTS, handler drain, and linked call tokens</text>
+
+  <defs>
+    <marker id="a" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L8,3 L0,6 Z" fill="#64748B"/>
+    </marker>
+  </defs>
+
+  <rect x="380" y="110" width="520" height="56" rx="10" fill="#FFF7ED" stroke="#B45309" stroke-width="2.5"/>
+  <text x="640" y="145" text-anchor="middle" font-family="Consolas, monospace" font-size="15" fill="#0F172A">IHostedService.StopAsync</text>
+  <line x1="640" y1="166" x2="640" y2="200" stroke="#64748B" stroke-width="2.5" marker-end="url(#a)"/>
+
+  <rect x="380" y="205" width="520" height="56" rx="10" fill="#FFFFFF" stroke="#1E293B" stroke-width="2"/>
+  <text x="640" y="240" text-anchor="middle" font-family="Consolas, monospace" font-size="14" fill="#0F172A">HandlerRegistry.ShutdownAllAsync(30s)</text>
+
+  <line x1="640" y1="261" x2="640" y2="290" stroke="#64748B" stroke-width="2.5"/>
+  <line x1="300" y1="290" x2="980" y2="290" stroke="#64748B" stroke-width="2.5"/>
+  <line x1="300" y1="290" x2="300" y2="320" stroke="#64748B" stroke-width="2.5" marker-end="url(#a)"/>
+  <line x1="980" y1="290" x2="980" y2="320" stroke="#64748B" stroke-width="2.5" marker-end="url(#a)"/>
+
+  <rect x="160" y="325" width="280" height="70" rx="10" fill="#ECFDF5" stroke="#0F766E" stroke-width="2"/>
+  <text x="300" y="355" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="14" font-weight="600" fill="#0F172A">StaticSchedulingState</text>
+  <text x="300" y="378" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="12" fill="#475569">per declaring Type</text>
+
+  <rect x="840" y="325" width="280" height="70" rx="10" fill="#ECFDF5" stroke="#0F766E" stroke-width="2"/>
+  <text x="980" y="355" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="14" font-weight="600" fill="#0F172A">InstanceSchedulingState</text>
+  <text x="980" y="378" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="12" fill="#475569">per object (CWT + field)</text>
+
+  <line x1="300" y1="395" x2="300" y2="430" stroke="#64748B" stroke-width="2" marker-end="url(#a)"/>
+  <line x1="980" y1="395" x2="980" y2="430" stroke="#64748B" stroke-width="2" marker-end="url(#a)"/>
+  <line x1="300" y1="450" x2="980" y2="450" stroke="#64748B" stroke-width="2"/>
+  <line x1="640" y1="450" x2="640" y2="480" stroke="#64748B" stroke-width="2.5" marker-end="url(#a)"/>
+
+  <rect x="340" y="485" width="600" height="90" rx="10" fill="#FFFFFF" stroke="#1E293B" stroke-width="2"/>
+  <text x="640" y="520" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="15" font-weight="600" fill="#0F172A">SchedulingOwnerState.ShutdownAsync</text>
+  <text x="640" y="548" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="13" fill="#334155">1) cancel owner CTS  2) Handler.ShutdownAsync  3) dispose CTS</text>
+
+  <line x1="640" y1="575" x2="640" y2="605" stroke="#64748B" stroke-width="2.5" marker-end="url(#a)"/>
+
+  <rect x="200" y="610" width="880" height="120" rx="10" fill="#F1F5F9" stroke="#94A3B8" stroke-width="1.5"/>
+  <text x="640" y="645" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="15" font-weight="600" fill="#0F172A">Two different cancel surfaces</text>
+  <text x="640" y="675" text-anchor="middle" font-family="Consolas, monospace" font-size="13" fill="#0F766E">OwnerToken - linked into method body (if CT param)</text>
+  <text x="640" y="700" text-anchor="middle" font-family="Consolas, monospace" font-size="13" fill="#B45309">Handler._shutdownCts - cancels exclusive Acquire waiters</text>
+</svg>

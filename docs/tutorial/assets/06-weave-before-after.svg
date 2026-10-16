@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="780" viewBox="0 0 1280 780">
+  <rect width="1280" height="780" fill="#F7F9FC"/>
+  <text x="640" y="48" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="28" font-weight="600" fill="#0F172A">Weaving a method - before / after</text>
+  <text x="640" y="78" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="15" fill="#475569">Same public MethodDefinition, body moved to __Original, stub calls hooks</text>
+
+  <rect x="60" y="110" width="540" height="300" rx="12" fill="#FFFFFF" stroke="#1E293B" stroke-width="2"/>
+  <text x="330" y="150" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="18" font-weight="600" fill="#64748B">BEFORE</text>
+  <rect x="100" y="180" width="460" height="180" rx="10" fill="#F1F5F9" stroke="#94A3B8" stroke-width="1.5"/>
+  <text x="330" y="220" text-anchor="middle" font-family="Consolas, monospace" font-size="14" fill="#0F172A">SaveAsync(Order o, CancellationToken ct)</text>
+  <text x="330" y="260" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="14" fill="#334155">[ScheduleGroup("orders", ExclusiveSerial)]</text>
+  <text x="330" y="295" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="14" fill="#475569">user IL / async state machine</text>
+  <text x="330" y="325" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="13" fill="#94A3B8">one method body</text>
+
+  <rect x="680" y="110" width="540" height="520" rx="12" fill="#FFFFFF" stroke="#0F766E" stroke-width="2.5"/>
+  <text x="950" y="150" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="18" font-weight="600" fill="#0F766E">AFTER</text>
+
+  <rect x="720" y="175" width="460" height="150" rx="10" fill="#ECFDF5" stroke="#0F766E" stroke-width="2"/>
+  <text x="950" y="210" text-anchor="middle" font-family="Consolas, monospace" font-size="13" fill="#0F172A">SaveAsync  [DebuggerStepThrough]</text>
+  <text x="950" y="240" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="13" fill="#334155">load state, ldc groupId</text>
+  <text x="950" y="265" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="13" fill="#334155">build Func (closure / method group)</text>
+  <text x="950" y="290" text-anchor="middle" font-family="Consolas, monospace" font-size="12" fill="#0F766E">call SchedulingWeaveHooks.Schedule*</text>
+  <text x="950" y="310" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="12" fill="#64748B">public signature unchanged</text>
+
+  <rect x="720" y="350" width="460" height="110" rx="10" fill="#F1F5F9" stroke="#94A3B8" stroke-width="1.5"/>
+  <text x="950" y="390" text-anchor="middle" font-family="Consolas, monospace" font-size="13" fill="#0F172A">__SaveAsync_Original (private)</text>
+  <text x="950" y="420" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="13" fill="#475569">original user IL + async attributes</text>
+  <text x="950" y="445" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="12" fill="#94A3B8">prefer breakpoints here</text>
+
+  <rect x="720" y="485" width="460" height="110" rx="10" fill="#FFF7ED" stroke="#B45309" stroke-width="2"/>
+  <text x="950" y="525" text-anchor="middle" font-family="Consolas, monospace" font-size="13" fill="#0F172A">&lt;&gt;c__GS_SaveAsync_*</text>
+  <text x="950" y="555" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="13" fill="#475569">display class captures non-CT args</text>
+  <text x="950" y="580" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="12" fill="#9A3412">Invoke(linkedToken) calls __Original</text>
+
+  <rect x="60" y="450" width="540" height="250" rx="12" fill="#F1F5F9" stroke="#94A3B8" stroke-width="1.5"/>
+  <text x="330" y="490" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="16" font-weight="600" fill="#0F172A">Also injected on the type</text>
+  <text x="330" y="530" text-anchor="middle" font-family="Consolas, monospace" font-size="13" fill="#334155">__groupedSchedulingState (instance)</text>
+  <text x="330" y="555" text-anchor="middle" font-family="Consolas, monospace" font-size="13" fill="#334155">__GS_CreateInstanceState</text>
+  <text x="330" y="580" text-anchor="middle" font-family="Consolas, monospace" font-size="13" fill="#334155">ctor prologue - InitInstanceState</text>
+  <text x="330" y="605" text-anchor="middle" font-family="Consolas, monospace" font-size="13" fill="#334155">IDisposable.Dispose wrapper</text>
+  <text x="330" y="645" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="13" fill="#64748B">Statics: field + .cctor + registry</text>
+  <text x="330" y="670" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="13" fill="#64748B">Why wrap body? delegates / reflection</text>
+</svg>

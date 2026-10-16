@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <rect width="1280" height="720" fill="#F7F9FC"/>
+  <text x="640" y="48" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="28" font-weight="600" fill="#0F172A">Nest stack (SchedulingNest)</text>
+  <text x="640" y="78" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="15" fill="#475569">AsyncLocal stack of active ActionsHandler instances</text>
+
+  <rect x="60" y="120" width="560" height="260" rx="12" fill="#ECFDF5" stroke="#0F766E" stroke-width="2.5"/>
+  <text x="340" y="155" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="18" font-weight="600" fill="#0F766E">ALLOWED</text>
+  <text x="340" y="185" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="14" fill="#334155">Cross-instance / cross-handler</text>
+
+  <rect x="120" y="210" width="180" height="50" rx="8" fill="#FFFFFF" stroke="#1E293B" stroke-width="2"/>
+  <text x="210" y="240" text-anchor="middle" font-family="Consolas, monospace" font-size="14" fill="#0F172A">handler Ha</text>
+  <text x="340" y="240" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="22" fill="#0F766E">-&gt;</text>
+  <rect x="380" y="210" width="180" height="50" rx="8" fill="#FFFFFF" stroke="#1E293B" stroke-width="2"/>
+  <text x="470" y="240" text-anchor="middle" font-family="Consolas, monospace" font-size="14" fill="#0F172A">handler Hb</text>
+
+  <text x="340" y="300" text-anchor="middle" font-family="Consolas, monospace" font-size="13" fill="#334155">stack: [Hb, Ha]</text>
+  <text x="340" y="330" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="13" fill="#475569">Different handlers - no conflict</text>
+  <text x="340" y="355" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="13" fill="#475569">Static / instance on same type also OK</text>
+
+  <rect x="660" y="120" width="560" height="260" rx="12" fill="#FEF2F2" stroke="#B91C1C" stroke-width="2.5"/>
+  <text x="940" y="155" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="18" font-weight="600" fill="#B91C1C">FORBIDDEN</text>
+  <text x="940" y="185" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="14" fill="#334155">Same-handler re-entry</text>
+
+  <rect x="720" y="210" width="180" height="50" rx="8" fill="#FFFFFF" stroke="#1E293B" stroke-width="2"/>
+  <text x="810" y="240" text-anchor="middle" font-family="Consolas, monospace" font-size="14" fill="#0F172A">handler Ha</text>
+  <text x="940" y="240" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="22" fill="#B91C1C">-&gt;</text>
+  <rect x="980" y="210" width="180" height="50" rx="8" fill="#FFFFFF" stroke="#B91C1C" stroke-width="2"/>
+  <text x="1070" y="240" text-anchor="middle" font-family="Consolas, monospace" font-size="14" fill="#B91C1C">handler Ha</text>
+
+  <text x="940" y="300" text-anchor="middle" font-family="Consolas, monospace" font-size="13" fill="#7F1D1D">ThrowIfActive(Ha)</text>
+  <text x="940" y="330" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="13" fill="#475569">InvalidOperationException</text>
+  <text x="940" y="355" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="13" fill="#475569">Also forbids A -&gt; B -&gt; A</text>
+
+  <rect x="60" y="420" width="1160" height="250" rx="12" fill="#FFFFFF" stroke="#1E293B" stroke-width="2"/>
+  <text x="640" y="455" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="16" font-weight="600" fill="#0F172A">When checks run</text>
+
+  <rect x="100" y="490" width="300" height="70" rx="8" fill="#F1F5F9" stroke="#94A3B8" stroke-width="1.5"/>
+  <text x="250" y="520" text-anchor="middle" font-family="Consolas, monospace" font-size="13" fill="#0F172A">ScheduleTask</text>
+  <text x="250" y="542" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="12" fill="#475569">ThrowIfActive (before queue)</text>
+
+  <text x="430" y="530" font-family="Segoe UI, Arial, sans-serif" font-size="22" fill="#94A3B8">-&gt;</text>
+
+  <rect x="470" y="490" width="300" height="70" rx="8" fill="#ECFDF5" stroke="#0F766E" stroke-width="2"/>
+  <text x="620" y="520" text-anchor="middle" font-family="Consolas, monospace" font-size="13" fill="#0F172A">RunWithNestAsync</text>
+  <text x="620" y="542" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="12" fill="#475569">Enter (push) around body</text>
+
+  <text x="800" y="530" font-family="Segoe UI, Arial, sans-serif" font-size="22" fill="#94A3B8">-&gt;</text>
+
+  <rect x="840" y="490" width="340" height="70" rx="8" fill="#F1F5F9" stroke="#94A3B8" stroke-width="1.5"/>
+  <text x="1010" y="520" text-anchor="middle" font-family="Consolas, monospace" font-size="13" fill="#0F172A">NestScope.Dispose</text>
+  <text x="1010" y="542" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="12" fill="#475569">Pop if still top of stack</text>
+
+  <text x="640" y="620" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="13" fill="#64748B">Why AsyncLocal? Continuations after await may run on another thread-pool thread.</text>
+  <text x="640" y="645" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="13" fill="#64748B">TSCH001 catches many nests in source; runtime is authoritative for reflection.</text>
+</svg>

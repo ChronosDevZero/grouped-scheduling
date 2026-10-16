@@ -1,0 +1,10 @@
+<Project>
+  <!--
+    NU1900 fires when NuGet can't reach api.nuget.org for vulnerability data.
+    Home-router DNS here is flaky; disable audit so intermittent offline blips
+    don't spam every restore/build. Re-enable when publishing if desired.
+  -->
+  <PropertyGroup>
+    <NuGetAudit>false</NuGetAudit>
+  </PropertyGroup>
+</Project>

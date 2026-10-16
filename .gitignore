@@ -1,0 +1,51 @@
+## Build outputs
+**/bin/
+**/obj/
+artifacts/
+*.nupkg
+*.snupkg
+project.lock.json
+project.fragment.lock.json
+
+## Test
+TestResults/
+*.trx
+*.coverage
+*.coveragexml
+coverage*/
+
+## Cursor (local agent tasks / plans — not part of the product)
+.cursor/
+
+## Visual Studio / Rider / VS Code local
+.vs/
+*.user
+*.suo
+*.useros
+*.sln.docstates
+*.rsuser
+*.DotSettings.user
+.idea/
+*.swp
+*~
+
+## OS
+Thumbs.db
+Desktop.ini
+.DS_Store
+$RECYCLE.BIN/
+
+## NuGet (legacy packages folder if present)
+**/[Pp]ackages/
+!**/[Pp]ackages/build/
+
+## Tutorial book (generated — rebuild via docs/tutorial/scripts/build-docx.ps1)
+docs/tutorial/GroupedScheduling-DeepDive.docx
+docs/tutorial/GroupedScheduling-DeepDive.html
+docs/tutorial/scripts/gdocs-reference.docx
+
+## Logs / temp
+*.log
+*.tmp
+*.temp
+*.cache

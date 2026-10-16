@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <rect width="1280" height="720" fill="#F7F9FC"/>
+  <text x="640" y="48" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="28" font-weight="600" fill="#0F172A">GroupedScheduling - end-to-end</text>
+  <text x="640" y="78" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="15" fill="#475569">From attribute to lane grant to host stop</text>
+
+  <text x="160" y="120" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="14" font-weight="600" fill="#0F766E">YOU WRITE</text>
+  <text x="480" y="120" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="14" font-weight="600" fill="#0F766E">BUILD TIME</text>
+  <text x="880" y="120" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="14" font-weight="600" fill="#0F766E">RUN TIME</text>
+
+  <rect x="40" y="150" width="240" height="70" rx="10" fill="#FFFFFF" stroke="#1E293B" stroke-width="2"/>
+  <text x="160" y="180" text-anchor="middle" font-family="Consolas, monospace" font-size="14" fill="#0F172A">[ScheduleGroup]</text>
+  <text x="160" y="202" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="13" fill="#475569">async method body</text>
+
+  <rect x="360" y="150" width="240" height="70" rx="10" fill="#FFFFFF" stroke="#1E293B" stroke-width="2"/>
+  <text x="480" y="180" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="15" font-weight="600" fill="#0F172A">Roslyn analyzers</text>
+  <text x="480" y="202" text-anchor="middle" font-family="Consolas, monospace" font-size="13" fill="#B45309">TSCH001-005</text>
+
+  <rect x="360" y="260" width="240" height="70" rx="10" fill="#FFFFFF" stroke="#1E293B" stroke-width="2"/>
+  <text x="480" y="290" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="15" font-weight="600" fill="#0F172A">CSC to intermediate DLL</text>
+  <text x="480" y="312" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="13" fill="#475569">CoreCompile output</text>
+
+  <rect x="360" y="370" width="240" height="80" rx="10" fill="#ECFDF5" stroke="#0F766E" stroke-width="2.5"/>
+  <text x="480" y="402" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="15" font-weight="600" fill="#0F172A">MSBuild weave</text>
+  <text x="480" y="424" text-anchor="middle" font-family="Consolas, monospace" font-size="12" fill="#0F766E">Mono.Cecil stubs + fields</text>
+
+  <rect x="760" y="150" width="280" height="70" rx="10" fill="#FFFFFF" stroke="#1E293B" stroke-width="2"/>
+  <text x="900" y="180" text-anchor="middle" font-family="Consolas, monospace" font-size="14" fill="#0F172A">SchedulingWeaveHooks</text>
+  <text x="900" y="202" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="13" fill="#475569">Schedule* / ScheduleStatic*</text>
+
+  <rect x="760" y="260" width="280" height="70" rx="10" fill="#ECFDF5" stroke="#0F766E" stroke-width="2.5"/>
+  <text x="900" y="290" text-anchor="middle" font-family="Consolas, monospace" font-size="15" font-weight="600" fill="#0F172A">ActionsHandler</text>
+  <text x="900" y="312" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="13" fill="#475569">nest check, track, shutdown</text>
+
+  <rect x="760" y="370" width="130" height="80" rx="10" fill="#FFFFFF" stroke="#1E293B" stroke-width="2"/>
+  <text x="825" y="405" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="13" font-weight="600" fill="#0F172A">Fully</text>
+  <text x="825" y="425" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="13" font-weight="600" fill="#0F172A">Concurrent</text>
+
+  <rect x="910" y="370" width="130" height="80" rx="10" fill="#FFFFFF" stroke="#1E293B" stroke-width="2"/>
+  <text x="975" y="405" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="13" font-weight="600" fill="#0F172A">Exclusive</text>
+  <text x="975" y="425" text-anchor="middle" font-family="Consolas, monospace" font-size="12" fill="#0F766E">GroupLane</text>
+
+  <rect x="760" y="490" width="280" height="60" rx="10" fill="#FFFFFF" stroke="#1E293B" stroke-width="2"/>
+  <text x="900" y="525" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="15" fill="#0F172A">Your original method body</text>
+
+  <rect x="760" y="590" width="280" height="60" rx="10" fill="#FFF7ED" stroke="#B45309" stroke-width="2"/>
+  <text x="900" y="618" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="14" font-weight="600" fill="#0F172A">Host Stop to HandlerRegistry</text>
+  <text x="900" y="638" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="12" fill="#9A3412">ShutdownAllAsync (30s drain)</text>
+
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L8,3 L0,6 Z" fill="#64748B"/>
+    </marker>
+  </defs>
+  <line x1="280" y1="185" x2="350" y2="185" stroke="#64748B" stroke-width="2.5" marker-end="url(#arrow)"/>
+  <line x1="480" y1="220" x2="480" y2="255" stroke="#64748B" stroke-width="2.5" marker-end="url(#arrow)"/>
+  <line x1="480" y1="330" x2="480" y2="365" stroke="#64748B" stroke-width="2.5" marker-end="url(#arrow)"/>
+  <line x1="600" y1="410" x2="750" y2="185" stroke="#64748B" stroke-width="2.5" marker-end="url(#arrow)"/>
+  <line x1="900" y1="220" x2="900" y2="255" stroke="#64748B" stroke-width="2.5" marker-end="url(#arrow)"/>
+  <line x1="860" y1="330" x2="825" y2="365" stroke="#64748B" stroke-width="2" marker-end="url(#arrow)"/>
+  <line x1="940" y1="330" x2="975" y2="365" stroke="#64748B" stroke-width="2" marker-end="url(#arrow)"/>
+  <line x1="825" y1="450" x2="860" y2="485" stroke="#64748B" stroke-width="2" marker-end="url(#arrow)"/>
+  <line x1="975" y1="450" x2="940" y2="485" stroke="#64748B" stroke-width="2" marker-end="url(#arrow)"/>
+  <line x1="900" y1="550" x2="900" y2="585" stroke="#B45309" stroke-width="2.5" marker-end="url(#arrow)"/>
+
+  <rect x="40" y="280" width="240" height="120" rx="10" fill="#F1F5F9" stroke="#94A3B8" stroke-width="1.5"/>
+  <text x="160" y="315" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="13" font-weight="600" fill="#0F172A">Authoring surface</text>
+  <text x="160" y="345" text-anchor="middle" font-family="Consolas, monospace" font-size="12" fill="#334155">ScheduleGroupAttribute</text>
+  <text x="160" y="365" text-anchor="middle" font-family="Consolas, monospace" font-size="12" fill="#334155">ScheduleMode</text>
+  <text x="160" y="385" text-anchor="middle" font-family="Consolas, monospace" font-size="12" fill="#334155">AddGroupedScheduling()</text>
+</svg>

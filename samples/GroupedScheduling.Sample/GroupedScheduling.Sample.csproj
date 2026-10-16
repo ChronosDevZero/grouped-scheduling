@@ -1,0 +1,45 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net11.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <IsPackable>false</IsPackable>
+    <RootNamespace>GroupedScheduling.Sample</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="9.0.10" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\GroupedScheduling\GroupedScheduling.csproj" />
+    <ProjectReference Include="..\..\GroupedScheduling.Analyzers\GroupedScheduling.Analyzers.csproj"
+                      OutputItemType="Analyzer"
+                      ReferenceOutputAssembly="false"
+                      PrivateAssets="all" />
+  </ItemGroup>
+
+  <!-- In-repo weave host (NuGet consumers get the same targets from the package). -->
+  <PropertyGroup>
+    <_GroupedSchedulingBuildProject>$(MSBuildThisFileDirectory)..\..\GroupedScheduling.Build\GroupedScheduling.Build.csproj</_GroupedSchedulingBuildProject>
+    <_GroupedSchedulingTaskOutDir>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\..\GroupedScheduling.Build\bin\$(Configuration)\net11.0\'))</_GroupedSchedulingTaskOutDir>
+    <GroupedSchedulingTaskAssembly>$(_GroupedSchedulingTaskOutDir)GroupedScheduling.Build.dll</GroupedSchedulingTaskAssembly>
+    <_GroupedSchedulingWeaverDll>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\..\GroupedScheduling.Weaver\bin\$(Configuration)\net11.0\GroupedScheduling.Weaver.dll'))</_GroupedSchedulingWeaverDll>
+    <_GroupedSchedulingTaskWeaverDll>$(_GroupedSchedulingTaskOutDir)GroupedScheduling.Weaver.dll</_GroupedSchedulingTaskWeaverDll>
+  </PropertyGroup>
+
+  <Import Project="..\..\GroupedScheduling.Build\build\GroupedScheduling.Build.props" />
+  <Import Project="..\..\GroupedScheduling.Build\build\GroupedScheduling.Build.targets" />
+
+  <!-- Rebuild the MSBuild task when missing or when the weaver is newer than the task's copied weaver. -->
+  <Target Name="EnsureGroupedSchedulingTaskBuilt" BeforeTargets="CoreCompile"
+          Inputs="$(_GroupedSchedulingBuildProject);$(_GroupedSchedulingWeaverDll)"
+          Outputs="$(GroupedSchedulingTaskAssembly);$(_GroupedSchedulingTaskWeaverDll)">
+    <MSBuild Projects="$(_GroupedSchedulingBuildProject)"
+             Targets="Build"
+             Properties="Configuration=$(Configuration)" />
+  </Target>
+
+</Project>

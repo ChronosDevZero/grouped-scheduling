@@ -1,0 +1,64 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net11.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <RootNamespace>GroupedScheduling.Build</RootNamespace>
+    <AssemblyName>GroupedScheduling.Build</AssemblyName>
+    <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+
+    <!-- PackageId must differ from the runtime project name to avoid NuGet graph ambiguity. -->
+    <PackageId>GroupedScheduling.Build</PackageId>
+    <Version>0.1.0</Version>
+    <Authors>GroupedScheduling</Authors>
+    <Description>Attribute-driven group-aware async scheduling with build-time IL weaving.</Description>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <IncludeBuildOutput>false</IncludeBuildOutput>
+    <SuppressDependenciesWhenPacking>true</SuppressDependenciesWhenPacking>
+    <DevelopmentDependency>false</DevelopmentDependency>
+    <TargetsForTfmSpecificContentInPackage>$(TargetsForTfmSpecificContentInPackage);_GroupedSchedulingPackFiles</TargetsForTfmSpecificContentInPackage>
+    <!-- tasks/* are MSBuild-only; lib has the runtime DLL. -->
+    <NoWarn>$(NoWarn);NU5100;NU5128</NoWarn>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Build.Utilities.Core" Version="18.11.0">
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\GroupedScheduling.Weaver\GroupedScheduling.Weaver.csproj" PrivateAssets="all" />
+    <ProjectReference Include="..\GroupedScheduling.Analyzers\GroupedScheduling.Analyzers.csproj"
+                      ReferenceOutputAssembly="false"
+                      PrivateAssets="all" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="build\GroupedScheduling.Build.props" Pack="true" PackagePath="build\" />
+    <None Include="build\GroupedScheduling.Build.targets" Pack="true" PackagePath="build\" />
+    <None Include="README.md" Pack="true" PackagePath="\" />
+  </ItemGroup>
+
+  <Target Name="_GroupedSchedulingPackFiles" DependsOnTargets="Build;ResolveProjectReferences">
+    <ItemGroup>
+      <!-- Runtime library for consumers -->
+      <TfmSpecificPackageFile Include="..\GroupedScheduling\bin\$(Configuration)\net11.0\GroupedScheduling.dll"
+                              PackagePath="lib\net11.0\" />
+      <!-- MSBuild task + weaver + Cecil (and runtime copy for typeof() in weaver process) -->
+      <TfmSpecificPackageFile Include="$(OutputPath)GroupedScheduling.Build.dll" PackagePath="tasks\net11.0\" />
+      <TfmSpecificPackageFile Include="$(OutputPath)GroupedScheduling.Weaver.dll" PackagePath="tasks\net11.0\" />
+      <TfmSpecificPackageFile Include="$(OutputPath)GroupedScheduling.dll" PackagePath="tasks\net11.0\" />
+      <TfmSpecificPackageFile Include="$(OutputPath)Mono.Cecil.dll" PackagePath="tasks\net11.0\" />
+      <TfmSpecificPackageFile Include="$(OutputPath)Mono.Cecil.Rocks.dll" PackagePath="tasks\net11.0\"
+                              Condition="Exists('$(OutputPath)Mono.Cecil.Rocks.dll')" />
+      <TfmSpecificPackageFile Include="$(OutputPath)Mono.Cecil.Pdb.dll" PackagePath="tasks\net11.0\"
+                              Condition="Exists('$(OutputPath)Mono.Cecil.Pdb.dll')" />
+      <!-- Roslyn analyzers -->
+      <TfmSpecificPackageFile Include="..\GroupedScheduling.Analyzers\bin\$(Configuration)\netstandard2.0\GroupedScheduling.Analyzers.dll"
+                              PackagePath="analyzers\dotnet\cs\" />
+    </ItemGroup>
+  </Target>
+
+</Project>
