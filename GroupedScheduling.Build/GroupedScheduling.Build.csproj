@@ -11,8 +11,14 @@
     <!-- PackageId must differ from the runtime project name to avoid NuGet graph ambiguity. -->
     <PackageId>GroupedScheduling.Build</PackageId>
     <Version>0.1.0</Version>
-    <Authors>GroupedScheduling</Authors>
+    <Authors>ChronosDevZero</Authors>
+    <Copyright>Copyright (c) 2026 ChronosDevZero</Copyright>
     <Description>Attribute-driven group-aware async scheduling with build-time IL weaving.</Description>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/ChronosDevZero/grouped-scheduling</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/ChronosDevZero/grouped-scheduling</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>dotnet;csharp;async;scheduling;msbuild;il-weaving;mono-cecil</PackageTags>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <IncludeBuildOutput>false</IncludeBuildOutput>
     <SuppressDependenciesWhenPacking>true</SuppressDependenciesWhenPacking>
